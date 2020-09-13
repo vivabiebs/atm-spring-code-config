@@ -3,12 +3,14 @@ package atm;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.io.File;
+
 @Configuration
 public class ATMConfig {
 
     @Bean
     public DataSource dataSource(){
-        return new DataSourceDB();
+        return new DataSourceFile("customers.txt");
     }
 
     @Bean
