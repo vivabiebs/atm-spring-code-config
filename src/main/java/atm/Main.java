@@ -5,11 +5,12 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 public class Main {
     public static void main(String[] args) {
-        DataSourceFile dataSourceFile = new DataSourceFile("customers.txt");
-        Bank bank = new Bank("My Bank", dataSourceFile);
-        ATM atm = new ATM(bank);
         ApplicationContext context = new AnnotationConfigApplicationContext(ATMConfig.class);
-        AtmUI atmUI = context.getBean(AtmUI.class);
-        atmUI.run();
+        Bank bank = context.getBean(Bank.class);
+        ATM atm = context.getBean(ATM.class);
+        String name = atm.validateCustomer(4, 4567);
+        System.out.println(name+" has "+atm.getBalance());
+        atm.withdraw(200);
+        System.out.println(name+" has "+atm.getBalance());
     }
 }
